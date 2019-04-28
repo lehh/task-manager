@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/app.js",
-    "dev": "env-cmd src/config/dev.env nodemon src/app.js"
+    "start": "node src/server.js",
+    "dev": "env-cmd src/config/dev.env nodemon src/server.js",
+    "test": "env-cmd src/config/test.env jest --detectOpenHandles"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +25,8 @@
   },
   "devDependencies": {
     "env-cmd": "^8.0.2",
-    "nodemon": "^1.18.11"
+    "jest": "^24.7.1",
+    "nodemon": "^1.18.11",
+    "supertest": "^4.0.2"
   }
 }

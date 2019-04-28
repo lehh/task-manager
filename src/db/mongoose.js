@@ -3,14 +3,15 @@ const fs = require('fs');
 
 const password = process.env.MONGODB_PW;
 const user = process.env.MONGODB_USER;
-const server = process.env.MONGODB_SERVER; //localhost
+const server = process.env.MONGODB_SERVER;
 const db = process.env.MONGODB_DB;
 const options = process.env.MONGODB_OPT;
 
-var url = `mongodb+srv://${user}:${password}@${server}/${db}${options}`;
+//Change this
+//var url = `mongodb+srv://${user}:${password}@${server}/${db}${options}`;
 
 //localhost url.
-//var url = `mongodb://${server}/${db}${options}`;
+var url = `mongodb://${server}/${db}${options}`;
 
 mongoose.connect(url, {
     useNewUrlParser: true,
@@ -22,7 +23,7 @@ mongoose.connect(url, {
 });
 
 mongoose.connection.on('connected', function () {
-    console.log('Connected to mongo database');
+    //console.log('Connected to mongo database');
 });
 
 mongoose.connection.on('error', function (err) {
