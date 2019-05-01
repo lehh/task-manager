@@ -29,7 +29,8 @@ const taskSchema = new mongoose.Schema({
         ref: 'User'
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    strict: "throw"
 });
 
 const Task = mongoose.model('Task', taskSchema);

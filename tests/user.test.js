@@ -1,26 +1,18 @@
 const request = require('supertest');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 const app = require('../src/app');
-const User = require('../src/models/user');
-
-const testUserId = new mongoose.Types.ObjectId();
-const testUser = {
-    _id: testUserId,
-    name: "test",
-    email: "test@example.com",
-    password: "somepass",
-    tokens: [jwt.sign({ _id: testUserId }, process.env.JWT_SECRET)]
-}
+const { testUser, setupUsers } = require('./fixtures/dbConn');
 
 beforeAll(async () => {
-    await User.deleteMany({});
-    //await new User(testUser).save();
+    await setupUsers();
 });
 
 test("POST /users", (done) => {
     request(app).post('/users')
-        .send(testUser)
+        .send({
+            name: "testName",
+            email: "test@example2.com",
+            password: "testPass"
+        })
         .expect(201, done);
 });
 
@@ -73,8 +65,7 @@ test("POST /users/logout", (done) => {
 });
 
 test("POST /users/logoutAll", async (done) => {
-    await User.deleteMany({});
-    await new User(testUser).save();
+    await setupUsers();
 
     request(app).post('/users/logoutAll')
         .set("Authorization", `Bearer ${testUser.tokens[0]}`)
@@ -83,8 +74,7 @@ test("POST /users/logoutAll", async (done) => {
 });
 
 test("DELETE /users/me success", async (done) => {
-    await User.deleteMany({});
-    await new User(testUser).save();
+    await setupUsers();
 
     request(app).delete('/users/me')
         .set("Authorization", `Bearer ${testUser.tokens[0]}`)
