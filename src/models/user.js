@@ -23,7 +23,8 @@ const userSchema = new mongoose.Schema({
         required: true
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    strict: "throw"
 });
 
 //Virtual property to get user tasks

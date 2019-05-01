@@ -37,7 +37,7 @@ router.post('/login', async (req, res) => {
         user.tokens.push(token);
         await user.save();
 
-        res.send('You shall pass' + token);
+        res.send('You shall pass');
     } catch (err) {
         res.status(500).send(err);
     }
