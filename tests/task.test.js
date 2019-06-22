@@ -30,7 +30,7 @@ test('GET /tasks success', (done) => {
         .expect(200)
         .end((err, res) => {
             if (err) return done(err);
-            expect(res.body.length).toEqual(2); //Check if it returns only the testUser tasks.
+            expect(res.body.length).toEqual(2); //Check if it only returns the testUser tasks.
             done();
         });
 });

@@ -51,12 +51,6 @@ test("PATCH /users/me success", (done) => {
         .expect(200, done);
 });
 
-test("PATCH /users/me failure", (done) => {
-    request(app).patch('/users/me')
-        .send(testUser)
-        .expect(401, done);
-});
-
 test("POST /users/logout", (done) => {
     request(app).post('/users/logout')
         .set("Authorization", `Bearer ${testUser.tokens[0]}`)
@@ -80,10 +74,4 @@ test("DELETE /users/me success", async (done) => {
         .set("Authorization", `Bearer ${testUser.tokens[0]}`)
         .send()
         .expect(200, done);
-});
-
-test("DELETE /users/me failure", (done) => {
-    request(app).delete('/users/me')
-        .send()
-        .expect(401, done);
 });
