@@ -62,6 +62,7 @@ router.get('/', auth, async (req, res) => {
 //Express automatically adds the id property to the req params.
 router.get('/:id', auth, async (req, res) => {
     try {
+        debugger;
         const task = await Task.findOne({ _id: req.params.id, owner: req.user._id });
 
         if (!task)
